@@ -4,20 +4,55 @@ using UnityEngine;
 
 public class BGM : MonoBehaviour
 {
-    static BGM instance = null;
-    [SerializeField] AudioClip bgmClip = null;
-
-    private void Awake()
+    public static BGM instance = null;
+    //[SerializeField] AudioClip bgmClip = null;
+    private AudioSource background;
+    private AudioSource death;
+    void Awake()
     {
-        if (instance)
+        //Create Singleton instance
+        if(!instance)
         {
-            Destroy(instance);
+            instance = this;
+            DontDestroyOnLoad(this);
+
+            //AudioSources references
+            AudioSource[] a = GetComponentsInChildren<AudioSource>();
+            background = a[0];
+            death = a[1];
+
+            //start background track
+            background.loop = true;
+            background.Play();
         }
-        instance = this;
-        DontDestroyOnLoad(this);
-        AudioSource a = gameObject.AddComponent<AudioSource>();
-        a.loop = true;
-        a.clip = bgmClip;
-        a.Play();        
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    public void SetBackgrounVolume(float v)
+    {
+        background.volume = v;
+    }
+    
+    public void SetDeathVolume(float v)
+    {
+        death.volume = v;
+    }
+
+    public float GetBackgrounVolume()
+    {
+        return background.volume;
+    }
+    
+    public float GetDeathVolume()
+    {
+        return death.volume;
+    }
+
+    public void PlayDeathClip()
+    {
+        death.Play();
     }
 }
