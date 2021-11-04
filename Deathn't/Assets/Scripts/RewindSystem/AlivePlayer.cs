@@ -8,7 +8,6 @@ public class AlivePlayer : MonoBehaviour
     public static AlivePlayer instance = null;
     [SerializeField] GameObject deadPlayerPrefab = null;
     public bool died = false;
-    [SerializeField] AudioClip deathClip = null;
     private GameObject ghost = null;
 
     private void OnEnable()
@@ -34,9 +33,7 @@ public class AlivePlayer : MonoBehaviour
         if (died == false)
         {
             Debug.Log("Killing player");
-            AudioSource a = GetComponent<AudioSource>();
-            a.clip = deathClip;
-            a.Play();
+            BGM.instance.PlayDeathClip();
             ghost = Instantiate(deadPlayerPrefab, transform.position, transform.rotation, null);
             died = true;
             RewindController.globalRewind = true;
@@ -57,11 +54,4 @@ public class AlivePlayer : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Enemy")
-    //    {
-    //        KillPlayer();
-    //    }
-    //}
 }
