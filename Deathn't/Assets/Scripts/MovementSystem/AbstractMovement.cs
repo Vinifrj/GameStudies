@@ -35,23 +35,30 @@ public abstract class AbstratMovement : MonoBehaviour
 
     public virtual void HorizontalMove(float input)
     {
-        Debug.Log(CapsuleCollider.size);
-        RaycastHit2D hit;
-        // horizontal input.
-        
-
+        //Uses ray cart to see if there will be a collision
+        RaycastHit2D lowHit;
+        RaycastHit2D highHit;
+        //Left
         if(input > 0)
-            hit = Physics2D.Raycast(rb.position+new Vector2(+CapsuleCollider.size.x/2,-CapsuleCollider.size.y/2),Vector2.right);
-        else
-            hit = Physics2D.Raycast(rb.position+new Vector2(-CapsuleCollider.size.x/2,-CapsuleCollider.size.y/2),Vector2.left);
-
-        //if(input > 0)
-        //    hit = Physics2D.Raycast(rb.position+new Vector2(+0.176f,-0.35f),Vector2.right);
-        //else
-        //    hit = Physics2D.Raycast(rb.position+new Vector2(-0.176f,-0.35f),Vector2.left);
-        if (hit.collider != null)
         {
-            if(hit.distance < 0.03f && hit.distance > -0.03f)
+            //Raycast using the lower bound of the collisor
+            lowHit = Physics2D.Raycast(rb.position+new Vector2(+CapsuleCollider.size.x/2,-CapsuleCollider.size.y/2),Vector2.right);
+            //Raycast using the upper bound of the collisor
+            highHit = Physics2D.Raycast(rb.position+new Vector2(+CapsuleCollider.size.x/2,+CapsuleCollider.size.y/2*0.65f),Vector2.right);
+        }
+        //Right
+        else
+        {
+            //Raycast using the lower bound of the collisor
+            lowHit = Physics2D.Raycast(rb.position+new Vector2(-CapsuleCollider.size.x/2,-CapsuleCollider.size.y/2),Vector2.left);
+            //Raycast using the upper bound of the collisor
+            highHit = Physics2D.Raycast(rb.position+new Vector2(-CapsuleCollider.size.x/2,+CapsuleCollider.size.y/2*0.65f),Vector2.left);
+        }
+
+        if (lowHit.collider != null && highHit.collider != null)
+        {
+            //If there is a collision, and it is not a trigger collision, turns the horizontal velocity 0
+            if(((lowHit.distance < 0.03f && lowHit.distance > -0.03f && !lowHit.collider.isTrigger) || (highHit.distance < 0.03f && highHit.distance > -0.03f) && !highHit.collider.isTrigger))
                 velocityInput = new Vector2(0f,velocityInput.y);
             else
                 velocityInput = new Vector2(input,velocityInput.y);
@@ -60,8 +67,6 @@ public abstract class AbstratMovement : MonoBehaviour
         {
             velocityInput = new Vector2(input,velocityInput.y);
         }
-        //Debug.Log(hit.distance);
-
     }
 
     // returns true if the character jumped 
