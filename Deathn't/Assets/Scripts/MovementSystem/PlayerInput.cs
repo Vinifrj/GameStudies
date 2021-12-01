@@ -18,6 +18,7 @@ public class PlayerInput : MonoBehaviour
 
         // move with horizontal input
         float x = Input.GetAxisRaw("Horizontal");
-        targetMovementBehavior.Move(new Vector2(x,0));
+        targetMovementBehavior.HorizontalMove(x);
+        //targetMovementBehavior.Move(new Vector2(x,0));
     }
 }
