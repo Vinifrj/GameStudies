@@ -217,6 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadPlayerPrefab: {fileID: 1352935434678386686, guid: 66d38b7bcf1f3194aa8d8e20d5bbaf20,
     type: 3}
+  died: 0
+  deathClip: {fileID: 0}
 --- !u!114 &1352935434678386656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  CapsuleCollider: {fileID: 319603620535730451}
   updateType: 1
   holdSimulation: 0
   groundCheck: {fileID: 1352935434447484364}
