@@ -54,14 +54,88 @@ public abstract class AbstratMovement : MonoBehaviour
             //Raycast using the upper bound of the collisor
             highHit = Physics2D.Raycast(rb.position+new Vector2(-CapsuleCollider.size.x/2,+CapsuleCollider.size.y/2*0.65f),Vector2.left);
         }
-
+        
         if (lowHit.collider != null && highHit.collider != null)
         {
             //If there is a collision, and it is not a trigger collision, turns the horizontal velocity 0
             if(((lowHit.distance < 0.03f && lowHit.distance > -0.03f && !lowHit.collider.isTrigger) || (highHit.distance < 0.03f && highHit.distance > -0.03f) && !highHit.collider.isTrigger))
+            {
                 velocityInput = new Vector2(0f,velocityInput.y);
+            }
             else
-                velocityInput = new Vector2(input,velocityInput.y);
+            {
+                if(lowHit.collider.isTrigger)
+                {
+                    OneWayDoor OWD = lowHit.collider.GetComponent<OneWayDoor>();
+                    if(OWD != null && lowHit.distance < 0.03f && lowHit.distance > -0.03f)
+                    {
+                        if(input > 0)
+                        {
+                            if(OWD.leftToRight)
+                            {
+                                velocityInput = new Vector2(input,velocityInput.y);
+                            }
+                            else
+                            {
+                                velocityInput = new Vector2(0f,velocityInput.y);
+                            }
+                        }
+                        else
+                        {
+                            if(OWD.rightToLeft)
+                            {
+                                velocityInput = new Vector2(input,velocityInput.y);
+                            }
+                            else
+                            {
+                                velocityInput = new Vector2(0f,velocityInput.y);
+                            }
+                        }
+                    }
+                    else
+                    {
+                         velocityInput = new Vector2(input,velocityInput.y);
+                    }
+                }
+                else if(highHit.collider.isTrigger )
+                {
+                    OneWayDoor OWD = highHit.collider.GetComponent<OneWayDoor>();
+                    if(OWD != null && highHit.distance < 0.03f && highHit.distance > -0.03f)
+                    {
+                        if(input > 0)
+                        {
+                            if(OWD.leftToRight)
+                            {
+                                velocityInput = new Vector2(input,velocityInput.y);
+                            }
+                            else
+                            {
+                                velocityInput = new Vector2(0f,velocityInput.y);
+                            }
+                        }
+                        else
+                        {
+                            if(OWD.rightToLeft)
+                            {
+                                velocityInput = new Vector2(input,velocityInput.y);
+                            }
+                            else
+                            {
+                                velocityInput = new Vector2(0f,velocityInput.y);
+                            }
+                        }
+                    }
+                    else
+                    {
+                         velocityInput = new Vector2(input,velocityInput.y);
+                    }
+                }
+                else
+                {
+                    velocityInput = new Vector2(input,velocityInput.y);
+                }
+
+            }
         }
         else
         {
