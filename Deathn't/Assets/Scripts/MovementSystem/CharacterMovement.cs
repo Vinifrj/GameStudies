@@ -19,15 +19,21 @@ public class CharacterMovement : AbstratMovement
 
     public override void StepSimulation(float deltaTime)
     {
-        // horizontal input
+        
         rb.velocity = new Vector2(velocityInput.x * speed, rb.velocity.y);
+        
+        //if(rb.SweepTest())
+        //{
+
+        //}
+
         // jump
         if (groundCheck != null && jumpInput && groundCheck.isColliding)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
         // Non-newtoniam jump logic
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y <= 0)
         {
             rb.velocity += Physics2D.gravity * (fallMultiplier - 1) * deltaTime;
         }
