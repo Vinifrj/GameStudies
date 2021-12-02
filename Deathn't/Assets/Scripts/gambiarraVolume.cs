@@ -10,10 +10,4 @@ public class gambiarraVolume : MonoBehaviour {
 
         audioSrc.volume = BGM.instance.GetBackgrounVolume();
 	}
-
-  void Update() {
-    if(audioSrc.volume != BGM.instance.GetBackgrounVolume())
-      audioSrc.volume = BGM.instance.GetBackgrounVolume();
-  }
-
 }
