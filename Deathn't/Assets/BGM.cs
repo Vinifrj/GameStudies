@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.IO;
 
 public class BGM : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BGM : MonoBehaviour
     //[SerializeField] AudioClip bgmClip = null;
     private AudioSource background;
     private AudioSource death;
+
     void Awake()
     {
         //Create Singleton instance
@@ -23,7 +25,7 @@ public class BGM : MonoBehaviour
 
             //start background track
             background.loop = true;
-            background.Play();
+            //background.Play();
         }
         else
         {
@@ -33,9 +35,11 @@ public class BGM : MonoBehaviour
 
     public void SetBackgrounVolume(float v)
     {
+
         background.volume = v;
+        //Debug.Log(background.volume);
     }
-    
+
     public void SetDeathVolume(float v)
     {
         death.volume = v;
@@ -44,8 +48,9 @@ public class BGM : MonoBehaviour
     public float GetBackgrounVolume()
     {
         return background.volume;
+        //Debug.Log(background.volume);
     }
-    
+
     public float GetDeathVolume()
     {
         return death.volume;
