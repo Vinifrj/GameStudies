@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ActualLevels/Erick3.unity
+- path: Assets/Scenes/ActualLevels/Oneway.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
