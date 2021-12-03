@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  CapsuleCollider: {fileID: 9071779251705201213}
   updateType: 0
   holdSimulation: 0
   groundCheck: {fileID: 1352935434447484364}
@@ -280,5 +281,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193dfad69d706104db3d6348778f7ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  sprite: {fileID: 0}
